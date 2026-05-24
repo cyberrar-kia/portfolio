@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Joshua Ovbiagele — Frontend Developer</title>
+<meta name="description" content="Frontend developer specialising in Next.js, React, and high-performance web applications. Available for remote work."/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,700&family=Cabinet+Grotesk:wght@300;400;500;700;800&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#f5f3ee;
+  --ink:#0c0c0c;
+  --ink2:#1a1a1a;
+  --muted:#666;
+  --muted2:#999;
+  --rule:rgba(12,12,12,0.1);
+  --rule2:rgba(12,12,12,0.06);
+  --accent:#1a1a1a;
+  --tag-bg:#ece9e2;
+  --w:#fff;
+  --card:#fff;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{font-size:16px;scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:'Cabinet Grotesk',sans-serif;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  line-height:1.5;
+}
+
+/* GRAIN */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;
+}
+
+/* NAV */
+nav{
+  position:fixed;inset:0 0 auto;z-index:200;
+  padding:0 48px;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all .4s;
+}
+nav.s{
+  background:rgba(245,243,238,0.92);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--rule);
+}
+.nav-logo{
+  font-family:'Fraunces',serif;
+  font-size:18px;font-weight:700;
+  color:var(--ink);text-decoration:none;
+  letter-spacing:-.02em;
+}
+.nav-logo em{font-style:italic;font-weight:300}
+.nl{display:flex;gap:32px;align-items:center}
+.nl a{font-size:13px;color:var(--muted);text-decoration:none;letter-spacing:.01em;transition:color .2s}
+.nl a:hover{color:var(--ink)}
+.nav-cta{
+  font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--bg);background:var(--ink);
+  padding:9px 22px;text-decoration:none;transition:opacity .2s;
+}
+.nav-cta:hover{opacity:.8}
+.nmob{display:none;background:none;border:none;color:var(--ink);font-size:20px}
+
+/* MOB MENU */
+.mmenu{
+  position:fixed;inset:0;background:var(--ink);z-index:199;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;gap:0;
+  transform:translateY(-100%);transition:transform .4s ease;
+}
+.mmenu.open{transform:translateY(0)}
+.mmenu a{
+  font-family:'Fraunces',serif;font-size:40px;font-weight:700;
+  color:rgba(255,255,255,.45);text-decoration:none;
+  padding:16px 0;width:80%;text-align:center;
+  border-bottom:1px solid rgba(255,255,255,.06);
+  opacity:0;transition:color .2s;
+}
+.mmenu.open a{animation:fadeUp .4s ease forwards}
+.mmenu.open a:nth-child(1){animation-delay:.05s}
+.mmenu.open a:nth-child(2){animation-delay:.1s}
+.mmenu.open a:nth-child(3){animation-delay:.15s}
+.mmenu.open a:nth-child(4){animation-delay:.2s}
+.mmenu a:hover{color:#fff}
+.mmenu a:last-child{border-bottom:none}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  padding:120px 48px 80px;
+  display:flex;flex-direction:column;
+  justify-content:flex-end;
+  position:relative;overflow:hidden;
+  max-width:1400px;margin:0 auto;
+}
+
+/* big BG number */
+.hero-bg-num{
+  position:absolute;
+  right:-20px;top:50%;transform:translateY(-50%);
+  font-family:'Fraunces',serif;
+  font-size:clamp(200px,28vw,400px);
+  font-weight:900;font-style:italic;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(12,12,12,0.05);
+  line-height:1;pointer-events:none;user-select:none;
+  letter-spacing:-.05em;
+}
+
+.hero-top{
+  display:flex;justify-content:space-between;
+  align-items:flex-start;margin-bottom:60px;flex-wrap:wrap;gap:24px;
+}
+.hero-available{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid var(--rule);background:var(--w);
+  padding:8px 16px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);margin-top:80px;
+}
+.avail-dot{
+  width:7px;height:7px;border-radius:50%;background:#22c55e;
+  box-shadow:0 0 0 2px rgba(34,197,94,.2);
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 2px rgba(34,197,94,.2)}50%{box-shadow:0 0 0 5px rgba(34,197,94,0)}}
+.hero-location{
+  font-size:12px;color:var(--muted2);letter-spacing:.04em;
+  margin-top:80px;text-align:right;line-height:1.6;
+}
+
+.hero-h1{
+  font-family:'Fraunces',serif;
+  font-size:clamp(56px,9vw,130px);
+  font-weight:900;line-height:.9;
+  letter-spacing:-.04em;color:var(--ink);
+  margin-bottom:0;
+}
+.hero-h1 .it{font-style:italic;font-weight:300;color:var(--muted)}
+
+.hero-bottom{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  margin-top:48px;flex-wrap:wrap;gap:32px;
+}
+.hero-sub{
+  font-size:15px;line-height:1.75;color:var(--muted);
+  font-weight:400;max-width:440px;
+}
+.hero-sub strong{color:var(--ink);font-weight:700}
+.hero-btns{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.hbp{
+  font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--bg);background:var(--ink);padding:14px 32px;
+  text-decoration:none;transition:opacity .2s;
+}
+.hbp:hover{opacity:.8}
+.hbg{
+  font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);border:1px solid var(--rule);padding:14px 28px;
+  text-decoration:none;transition:all .2s;
+}
+.hbg:hover{color:var(--ink);border-color:rgba(12,12,12,.25)}
+
+/* DIVIDER */
+.div-rule{border:none;border-top:1px solid var(--rule);margin:0 48px}
+
+/* STACK STRIP */
+.stack{padding:20px 48px;display:flex;gap:0;flex-wrap:wrap;align-items:center;border-bottom:1px solid var(--rule)}
+.stack-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted2);margin-right:32px;flex-shrink:0}
+.stack-items{display:flex;flex-wrap:wrap;gap:8px}
+.stag{
+  font-family:'DM Mono',monospace;
+  font-size:11px;color:var(--muted);
+  border:1px solid var(--rule);padding:5px 12px;
+  background:var(--tag-bg);letter-spacing:.04em;
+  transition:all .2s;
+}
+.stag:hover{color:var(--ink);border-color:rgba(12,12,12,.2)}
+
+/* WORK */
+.work{padding:100px 48px;max-width:1400px;margin:0 auto}
+.sec-label{
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--muted2);margin-bottom:48px;
+  display:flex;align-items:center;gap:12px;
+}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--rule)}
+.pgrid{display:flex;flex-direction:column;gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.pc{
+  background:var(--bg);
+  padding:48px;
+  display:grid;grid-template-columns:1fr 2fr;
+  gap:48px;align-items:start;
+  transition:background .3s;
+  text-decoration:none;
+  position:relative;
+}
+.pc:hover{background:var(--w)}
+.pc-num{
+  font-family:'DM Mono',monospace;
+  font-size:11px;color:var(--muted2);
+  letter-spacing:.08em;margin-bottom:16px;
+}
+.pc-name{
+  font-family:'Fraunces',serif;
+  font-size:clamp(22px,3vw,36px);
+  font-weight:700;color:var(--ink);
+  letter-spacing:-.02em;line-height:1.1;
+  margin-bottom:8px;
+}
+.pc-url{
+  font-family:'DM Mono',monospace;
+  font-size:11px;color:var(--muted2);
+  letter-spacing:.04em;
+  display:flex;align-items:center;gap:6px;
+}
+.pc-url::before{content:'↗';font-size:10px}
+.pc-desc{
+  font-size:14px;line-height:1.8;color:var(--muted);
+  margin-bottom:20px;font-weight:400;
+}
+.pc-tags{display:flex;gap:6px;flex-wrap:wrap}
+.ptag{
+  font-family:'DM Mono',monospace;
+  font-size:10px;letter-spacing:.06em;text-transform:uppercase;
+  border:1px solid var(--rule);padding:4px 10px;
+  color:var(--muted2);background:var(--tag-bg);
+}
+.pc-arrow{
+  position:absolute;top:48px;right:48px;
+  font-size:20px;color:var(--rule);
+  transition:all .3s;
+}
+.pc:hover .pc-arrow{color:var(--ink);transform:translate(3px,-3px)}
+
+/* ABOUT */
+.about{
+  border-top:1px solid var(--rule);
+  padding:100px 48px;
+  display:grid;grid-template-columns:1fr 1.5fr;
+  gap:100px;max-width:1400px;margin:0 auto;
+  align-items:start;
+}
+.ab-h2{
+  font-family:'Fraunces',serif;
+  font-size:clamp(36px,5vw,60px);
+  font-weight:900;letter-spacing:-.03em;
+  line-height:.95;color:var(--ink);
+  position:sticky;top:80px;
+}
+.ab-h2 em{font-style:italic;font-weight:300;color:var(--muted)}
+.ab-body{
+  font-size:16px;line-height:1.85;color:var(--muted);
+  margin-bottom:48px;font-weight:400;
+}
+.ab-body strong{color:var(--ink);font-weight:700}
+.ab-skills{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1px;background:var(--rule);border:1px solid var(--rule);
+}
+.ab-skill{
+  background:var(--bg);padding:24px;
+  transition:background .2s;
+}
+.ab-skill:hover{background:var(--w)}
+.ab-skill-title{
+  font-size:13px;font-weight:700;color:var(--ink);
+  margin-bottom:6px;letter-spacing:.01em;
+}
+.ab-skill-desc{font-size:12px;line-height:1.65;color:var(--muted2)}
+
+/* CONTACT */
+.contact{
+  border-top:1px solid var(--rule);
+  padding:100px 48px;
+  max-width:1400px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:100px;align-items:start;
+}
+.con-h2{
+  font-family:'Fraunces',serif;
+  font-size:clamp(36px,5vw,60px);
+  font-weight:900;letter-spacing:-.03em;
+  line-height:.95;color:var(--ink);
+  margin-bottom:16px;
+}
+.con-h2 em{font-style:italic;font-weight:300;color:var(--muted)}
+.con-sub{font-size:15px;line-height:1.75;color:var(--muted);margin-bottom:40px}
+.con-links{display:flex;flex-direction:column;gap:0;border:1px solid var(--rule)}
+.cl{
+  padding:18px 24px;border-bottom:1px solid var(--rule);
+  display:flex;align-items:center;justify-content:space-between;
+  text-decoration:none;transition:background .2s;
+}
+.cl:last-child{border-bottom:none}
+.cl:hover{background:var(--w)}
+.cl-left{display:flex;align-items:center;gap:12px}
+.cl-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted2);width:60px}
+.cl-value{font-size:13px;color:var(--ink);font-weight:500}
+.cl-arrow{font-size:14px;color:var(--muted2);transition:all .2s}
+.cl:hover .cl-arrow{color:var(--ink);transform:translate(2px,-2px)}
+
+.ff{display:flex;flex-direction:column;gap:6px;margin-bottom:18px}
+.ff label{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted2)}
+.ff input,.ff textarea{
+  background:var(--w);border:1px solid var(--rule);
+  color:var(--ink);padding:14px 18px;
+  font-family:'Cabinet Grotesk',sans-serif;font-size:14px;font-weight:400;
+  outline:none;transition:border-color .25s;resize:none;
+}
+.ff input:focus,.ff textarea:focus{border-color:var(--ink)}
+.ff input::placeholder,.ff textarea::placeholder{color:var(--muted2)}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px}
+.frow .ff{margin-bottom:0}
+.fsub{
+  width:100%;background:var(--ink);color:var(--bg);
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:16px;border:none;margin-top:4px;transition:opacity .2s;
+}
+.fsub:hover{opacity:.8}
+
+/* FOOTER */
+footer{
+  border-top:1px solid var(--rule);
+  padding:28px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:16px;
+}
+.ft-logo{
+  font-family:'Fraunces',serif;font-size:16px;font-weight:700;
+  color:var(--ink);text-decoration:none;letter-spacing:-.01em;
+}
+.ft-logo em{font-style:italic;font-weight:300}
+.ft-copy{font-size:11px;color:var(--muted2);letter-spacing:.04em}
+.ft-links{display:flex;gap:24px}
+.ft-links a{font-size:11px;color:var(--muted2);text-decoration:none;transition:color .2s}
+.ft-links a:hover{color:var(--ink)}
+
+/* REVEALS */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .85s ease,transform .85s ease}
+.rv.on{opacity:1;transform:none}
+.rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}
+.rv.d3{transition-delay:.24s}.rv.d4{transition-delay:.32s}
+.rv.d5{transition-delay:.4s}.rv.d6{transition-delay:.48s}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  nav{padding:0 24px}
+  .nl,.nav-cta{display:none}
+  .nmob{display:block}
+  .hero,.work,.about,.contact{padding-left:24px;padding-right:24px}
+  .hero{padding-top:100px;padding-bottom:60px}
+  .hero-bg-num{display:none}
+  .hero-location{display:none}
+  .pc{grid-template-columns:1fr;gap:20px;padding:32px 24px}
+  .pc-arrow{top:24px;right:24px}
+  .about{grid-template-columns:1fr;gap:40px;padding-top:80px}
+  .ab-h2{position:static}
+  .ab-skills{grid-template-columns:1fr}
+  .contact{grid-template-columns:1fr;gap:48px}
+  .stack{padding:16px 24px}
+  .div-rule{margin:0 24px}
+  footer{padding:24px;flex-direction:column;align-items:flex-start;gap:12px}
+  .frow{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .hero-h1{font-size:clamp(48px,12vw,80px)}
+  .hstats{gap:24px}
+}
+</style>
+</head>
+<body>
+
+<!-- MOB MENU -->
+<div class="mmenu" id="mmenu">
+  <a href="#work" onclick="cm()">Work</a>
+  <a href="#about" onclick="cm()">About</a>
+  <a href="#contact" onclick="cm()">Contact</a>
+  <a href="mailto:ovbiageleotaigbe@gmail.com" onclick="cm()">Email me</a>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">Joshua <em>Ovbiagele</em></a>
+  <div class="nl">
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="mailto:ovbiageleotaigbe@gmail.com" class="nav-cta">Hire me</a>
+  <button class="nmob" id="nmob">☰</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-num">JO</div>
+  <div class="hero-top">
+    <div class="hero-available"><div class="avail-dot"></div>Available for remote work</div>
+    <div class="hero-location">Based in Nigeria<br>Open to worldwide remote</div>
+  </div>
+  <h1 class="hero-h1">
+    Frontend<br>Developer<br><span class="it">& Designer</span>
+  </h1>
+  <div class="hero-bottom">
+    <p class="hero-sub">I build <strong>fast, polished, production-grade</strong> websites and web applications — from landing pages to full platforms. Specialising in Next.js, React, and motion-rich interfaces.</p>
+    <div class="hero-btns">
+      <a href="#work" class="hbp">View my work</a>
+      <a href="#contact" class="hbg">Get in touch</a>
+    </div>
+  </div>
+</section>
+
+<hr class="div-rule"/>
+
+<!-- STACK STRIP -->
+<div class="stack">
+  <div class="stack-label">Stack</div>
+  <div class="stack-items">
+    <div class="stag">Next.js</div>
+    <div class="stag">React</div>
+    <div class="stag">TypeScript</div>
+    <div class="stag">Tailwind CSS</div>
+    <div class="stag">GSAP</div>
+    <div class="stag">Framer Motion</div>
+    <div class="stag">Supabase</div>
+    <div class="stag">Vercel</div>
+    <div class="stag">Node.js</div>
+    <div class="stag">Figma</div>
+    <div class="stag">Resend</div>
+    <div class="stag">Stripe</div>
+  </div>
+</div>
+
+<!-- WORK -->
+<section id="work" class="work">
+  <div class="sec-label rv">Selected work</div>
+  <div class="pgrid">
+
+    <a class="pc rv" href="https://fasttrackliteracy.com" target="_blank" rel="noopener">
+      <div>
+        <div class="pc-num">01 / 06</div>
+        <div class="pc-name">FastTrack Literacy™</div>
+        <div class="pc-url">fasttrackliteracy.com</div>
+      </div>
+      <div>
+        <p class="pc-desc">Full multi-page marketing and resource platform for a US-based EdTech company. Built from scratch with animated stats, HeyZine flipbook integration, Formspree contact forms, and a complete CMS-style content architecture. 70+ client revision items delivered.</p>
+        <div class="pc-tags">
+          <div class="ptag">Next.js 14</div><div class="ptag">Tailwind</div>
+          <div class="ptag">Vercel</div><div class="ptag">Formspree</div>
+          <div class="ptag">Animations</div>
+        </div>
+      </div>
+      <div class="pc-arrow">↗</div>
+    </a>
+
+    <a class="pc rv d1" href="https://the-dock-ashen.vercel.app" target="_blank" rel="noopener">
+      <div>
+        <div class="pc-num">02 / 06</div>
+        <div class="pc-name">The Dock Plymouth</div>
+        <div class="pc-url">the-dock-ashen.vercel.app</div>
+      </div>
+      <div>
+        <p class="pc-desc">Cinematic restaurant demo for a harbourside venue in Plymouth, UK. Features a custom cursor, parallax hero, animated marquee strip, tab-switching menu sections, auto-rotating testimonials, and a booking form with confirmation state.</p>
+        <div class="pc-tags">
+          <div class="ptag">HTML/CSS/JS</div><div class="ptag">Parallax</div>
+          <div class="ptag">Custom cursor</div><div class="ptag">Scroll reveals</div>
+        </div>
+      </div>
+      <div class="pc-arrow">↗</div>
+    </a>
+
+    <a class="pc rv d2" href="https://discryptic-demo.vercel.app/premium.html" target="_blank" rel="noopener">
+      <div>
+        <div class="pc-num">03 / 06</div>
+        <div class="pc-name">Discryptic</div>
+        <div class="pc-url">discryptic-demo.vercel.app</div>
+      </div>
+      <div>
+        <p class="pc-desc">Premium corporate site for a US-based digital venture studio. Minimal dark aesthetic with mesh gradient hero, animated bento grid, scrolling ticker, and a structured portfolio section. Built as a spec demo within hours of seeing the brief.</p>
+        <div class="pc-tags">
+          <div class="ptag">HTML/CSS/JS</div><div class="ptag">Mesh gradients</div>
+          <div class="ptag">Bento grid</div><div class="ptag">Dark theme</div>
+        </div>
+      </div>
+      <div class="pc-arrow">↗</div>
+    </a>
+
+    <a class="pc rv d1" href="https://ign-drab.vercel.app" target="_blank" rel="noopener">
+      <div>
+        <div class="pc-num">04 / 06</div>
+        <div class="pc-name">IGN Consulting</div>
+        <div class="pc-url">ign-drab.vercel.app</div>
+      </div>
+      <div>
+        <p class="pc-desc">Editorial corporate site for a US software consulting firm. Split-screen hero, Playfair Display typography, bento-grid services layout, project case studies, testimonials, and a fully responsive design with working mobile navigation.</p>
+        <div class="pc-tags">
+          <div class="ptag">HTML/CSS/JS</div><div class="ptag">Editorial design</div>
+          <div class="ptag">Bento grid</div><div class="ptag">Mobile-first</div>
+        </div>
+      </div>
+      <div class="pc-arrow">↗</div>
+    </a>
+
+    <a class="pc rv d2" href="https://zenflow-indol.vercel.app" target="_blank" rel="noopener">
+      <div>
+        <div class="pc-num">05 / 06</div>
+        <div class="pc-name">Zenflow Counter</div>
+        <div class="pc-url">zenflow-indol.vercel.app</div>
+      </div>
+      <div>
+        <p class="pc-desc">Branded live counter display for a medical trade show booth. Counts +1 every 1.4 seconds with pause/resume/reset controls, animated tick progress bar, pulse animation, and keyboard shortcuts. Runs fully offline in any browser.</p>
+        <div class="pc-tags">
+          <div class="ptag">HTML/CSS/JS</div><div class="ptag">Offline-first</div>
+          <div class="ptag">Animation</div><div class="ptag">Medical tech</div>
+        </div>
+      </div>
+      <div class="pc-arrow">↗</div>
+    </a>
+
+    <a class="pc rv d3" href="https://proposal-slides-liard.vercel.app" target="_blank" rel="noopener">
+      <div>
+        <div class="pc-num">06 / 06</div>
+        <div class="pc-name">Proposal Deck</div>
+        <div class="pc-url">proposal-slides-liard.vercel.app</div>
+      </div>
+      <div>
+        <p class="pc-desc">Animated interactive proposal deck with button-only slide navigation, smooth fade transitions, progress bar, dot indicators, and keyboard navigation. Fully mobile responsive — built to replace static PDF proposals.</p>
+        <div class="pc-tags">
+          <div class="ptag">HTML/CSS/JS</div><div class="ptag">Slide transitions</div>
+          <div class="ptag">Mobile-first</div><div class="ptag">Interactive</div>
+        </div>
+      </div>
+      <div class="pc-arrow">↗</div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about">
+  <div class="rv">
+    <h2 class="ab-h2">About<br><em>me</em></h2>
+  </div>
+  <div class="rv d2">
+    <p class="ab-body">I'm Joshua, a <strong>frontend developer and UI designer</strong> based in Nigeria. I build fast, production-grade websites and web applications for clients across the US, UK, and beyond — fully remote.<br><br>I specialise in <strong>Next.js, React, and motion-rich interfaces</strong> — the kind that look and perform like they belong on Awwwards. I work with a combination of strong design instinct and clean engineering to deliver work that converts, performs, and lasts.<br><br>I've shipped 70+ revision rounds for a single client, built full SaaS platforms, cold-pitched directly with working demos, and delivered production code fast. I don't wait to be told what to do — I build, ship, and iterate.</p>
+    <div class="ab-skills">
+      <div class="ab-skill">
+        <div class="ab-skill-title">Frontend Development</div>
+        <div class="ab-skill-desc">Next.js, React, TypeScript, Tailwind CSS, HTML5, CSS3, JavaScript ES2024</div>
+      </div>
+      <div class="ab-skill">
+        <div class="ab-skill-title">Motion & Animation</div>
+        <div class="ab-skill-desc">GSAP, ScrollTrigger, Framer Motion, CSS animations, scroll-driven effects</div>
+      </div>
+      <div class="ab-skill">
+        <div class="ab-skill-title">Backend & Data</div>
+        <div class="ab-skill-desc">Supabase, Firebase, Node.js, REST APIs, Prisma, PostgreSQL</div>
+      </div>
+      <div class="ab-skill">
+        <div class="ab-skill-title">Tools & Deployment</div>
+        <div class="ab-skill-desc">Vercel, GitHub, Figma, Resend, Stripe, Formspree, Paystack</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="rv">
+    <h2 class="con-h2">Let's<br><em>work</em></h2>
+    <p class="con-sub">Available for full-time remote roles, contract work, and freelance projects. I respond within 24 hours.</p>
+    <div class="con-links">
+      <a class="cl" href="mailto:ovbiageleotaigbe@gmail.com">
+        <div class="cl-left">
+          <div class="cl-label">Email</div>
+          <div class="cl-value">ovbiageleotaigbe@gmail.com</div>
+        </div>
+        <div class="cl-arrow">↗</div>
+      </a>
+      <a class="cl" href="https://github.com/cyberrar-kia" target="_blank" rel="noopener">
+        <div class="cl-left">
+          <div class="cl-label">GitHub</div>
+          <div class="cl-value">github.com/cyberrar-kia</div>
+        </div>
+        <div class="cl-arrow">↗</div>
+      </a>
+      <a class="cl" href="https://www.upwork.com/freelancers/~yourprofile" target="_blank" rel="noopener">
+        <div class="cl-left">
+          <div class="cl-label">Upwork</div>
+          <div class="cl-value">Joshua Ovbiagele</div>
+        </div>
+        <div class="cl-arrow">↗</div>
+      </a>
+    </div>
+  </div>
+  <div class="rv d2">
+    <div class="frow">
+      <div class="ff"><label>Name</label><input type="text" placeholder="Your name"/></div>
+      <div class="ff"><label>Email</label><input type="email" placeholder="you@company.com"/></div>
+    </div>
+    <div class="ff"><label>Subject</label><input type="text" placeholder="What are you building?"/></div>
+    <div class="ff"><label>Message</label><textarea rows="6" placeholder="Tell me about your project, role, or idea…"></textarea></div>
+    <button class="fsub" onclick="this.textContent='Message sent — I\'ll be in touch within 24hrs ✓';this.style.background='#166534'">Send Message</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="/" class="ft-logo">Joshua <em>Ovbiagele</em></a>
+  <div class="ft-links">
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="ft-copy">© 2025 Joshua Ovbiagele. All rights reserved.</div>
+</footer>
+
+<script>
+// Nav
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('s',scrollY>50));
+
+// Mobile menu
+let open=false;
+const nmob=document.getElementById('nmob');
+const mmenu=document.getElementById('mmenu');
+nmob.addEventListener('click',()=>{
+  open=!open;
+  mmenu.classList.toggle('open',open);
+  nmob.textContent=open?'✕':'☰';
+  document.body.style.overflow=open?'hidden':'';
+});
+function cm(){open=false;mmenu.classList.remove('open');nmob.textContent='☰';document.body.style.overflow=''}
+
+// Reveals
+const o=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');o.unobserve(e.target)}})},{threshold:.08});
+document.querySelectorAll('.rv').forEach(el=>o.observe(el));
+</script>
+</body>
+</html>
