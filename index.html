@@ -340,6 +340,25 @@ footer{
 .ft-links a{font-size:11px;color:var(--muted2);text-decoration:none;transition:color .2s}
 .ft-links a:hover{color:var(--ink)}
 
+
+/* EMAIL CTA */
+.email-cta{padding:8px 0}
+.email-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted2);margin-bottom:16px}
+.email-big{
+  font-family:'Fraunces',serif;
+  font-size:clamp(18px,2.5vw,28px);
+  font-weight:700;color:var(--ink);
+  text-decoration:none;letter-spacing:-.02em;
+  border-bottom:2px solid var(--ink);
+  padding-bottom:4px;
+  display:inline-block;
+  margin-bottom:20px;
+  transition:opacity .2s;
+  word-break:break-all;
+}
+.email-big:hover{opacity:.6}
+.email-note{font-size:14px;line-height:1.75;color:var(--muted);max-width:400px}
+
 /* REVEALS */
 .rv{opacity:0;transform:translateY(24px);transition:opacity .85s ease,transform .85s ease}
 .rv.on{opacity:1;transform:none}
@@ -402,7 +421,7 @@ footer{
   <div class="hero-bg-num">JO</div>
   <div class="hero-top">
     <div class="hero-available"><div class="avail-dot"></div>Available for remote work</div>
-    <div class="hero-location">Based in Nigeria<br>Open to worldwide remote</div>
+    <div class="hero-location">Open to worldwide remote</div>
   </div>
   <h1 class="hero-h1">
     Frontend<br>Developer<br><span class="it">& Designer</span>
@@ -434,6 +453,10 @@ footer{
     <div class="stag">Figma</div>
     <div class="stag">Resend</div>
     <div class="stag">Stripe</div>
+    <div class="stag">PostgreSQL</div>
+    <div class="stag">Prisma</div>
+    <div class="stag">REST APIs</div>
+    <div class="stag">Paystack</div>
   </div>
 </div>
 
@@ -610,7 +633,7 @@ footer{
       </div>
       <div class="ab-skill">
         <div class="ab-skill-title">Backend & Data</div>
-        <div class="ab-skill-desc">Supabase, Firebase, Node.js, REST APIs, Prisma, PostgreSQL</div>
+        <div class="ab-skill-desc">Supabase, Firebase, Node.js, REST APIs, Prisma, PostgreSQL, authentication, webhooks, Stripe & Paystack payments</div>
       </div>
       <div class="ab-skill">
         <div class="ab-skill-title">Tools & Deployment</div>
@@ -650,13 +673,12 @@ footer{
     </div>
   </div>
   <div class="rv d2">
-    <div class="frow">
-      <div class="ff"><label>Name</label><input type="text" placeholder="Your name"/></div>
-      <div class="ff"><label>Email</label><input type="email" placeholder="you@company.com"/></div>
+    <div class="email-cta">
+      <div class="email-label">Drop me a line</div>
+      <a href="mailto:ovbiageleotaigbe@gmail.com" class="email-big">ovbiageleotaigbe@gmail.com</a>
+      <p class="email-note">I respond within 24 hours. Let me know what you're building and I'll get back to you with how I can help.</p>
+      <a href="mailto:ovbiageleotaigbe@gmail.com" class="hbp" style="display:inline-block;margin-top:28px">Send me an email →</a>
     </div>
-    <div class="ff"><label>Subject</label><input type="text" placeholder="What are you building?"/></div>
-    <div class="ff"><label>Message</label><textarea rows="6" placeholder="Tell me about your project, role, or idea…"></textarea></div>
-    <button class="fsub" onclick="this.textContent='Message sent — I\'ll be in touch within 24hrs ✓';this.style.background='#166534'">Send Message</button>
   </div>
 </section>
 
